@@ -1,0 +1,14 @@
+server:
+  port: 8081
+
+spring:
+  application:
+    name: backend-service
+
+# Logging Configuration
+logging:
+  level:
+    root: INFO
+    com.apigateway.backend: DEBUG
+  pattern:
+    console: "%d{HH:mm:ss.SSS} [%thread] %-5level %logger{36} - %msg%n"

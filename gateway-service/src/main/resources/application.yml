@@ -1,0 +1,59 @@
+server:
+  port: 8080
+
+spring:
+  application:
+    name: ai-api-gateway
+
+  cloud:
+    gateway:
+      routes:
+        - id: product-service
+          uri: http://localhost:8081
+          predicates:
+            - Path=/api/products/**
+
+        - id: user-service
+          uri: http://localhost:8081
+          predicates:
+            - Path=/api/users/**
+
+        - id: health-service
+          uri: http://localhost:8081
+          predicates:
+            - Path=/health
+
+# ???????????????????????????????????????????????????????????
+# Gateway Configuration (NEW!)
+# ???????????????????????????????????????????????????????????
+gateway:
+  # Rate Limiting Settings
+  ratelimit:
+    requests-per-minute: 60        # Normal user limit
+    burst-threshold: 100           # Absolute maximum
+    window-size-seconds: 60        # Sliding window size
+
+  # Request Analysis
+  analysis:
+    enabled: true
+    suspicious-user-agents:
+      - python-requests
+      - curl
+      - wget
+      - scrapy
+      - bot
+      - spider
+      - crawler
+
+  # Logging
+  logging:
+    verbose: true
+
+# Logging Configuration
+logging:
+  level:
+    root: INFO
+    com.apigateway.gateway: DEBUG
+    org.springframework.cloud.gateway: INFO
+  pattern:
+    console: "%d{HH:mm:ss.SSS} [%thread] %-5level %logger{36} - %msg%n"

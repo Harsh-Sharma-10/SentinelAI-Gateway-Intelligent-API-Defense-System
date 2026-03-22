@@ -44,7 +44,7 @@ public class RateLimitingFilter implements GlobalFilter, Ordered {
 
         // Check if request count exceeds burst threshold
         if (stats.getRequestcount() > gatewayConfig.getBurstThreshold()) {
-            log.warn("🚫 RATE LIMIT EXCEEDED: IP={}, Count={}, Threshold={}",
+            log.warn(" RATE LIMIT EXCEEDED: IP={}, Count={}, Threshold={}",
                     stats.getIpAddress(),
                     stats.getRequestcount(),
                     gatewayConfig.getBurstThreshold());
@@ -54,7 +54,7 @@ public class RateLimitingFilter implements GlobalFilter, Ordered {
 
         // Check for suspicious patterns
         if (isSuspiciousUserAgent(stats.getUserAgent())) {
-            log.warn("🚫 SUSPICIOUS USER AGENT: IP={}, UserAgent={}",
+            log.warn(" SUSPICIOUS USER AGENT: IP={}, UserAgent={}",
                     stats.getIpAddress(),
                     stats.getUserAgent());
 

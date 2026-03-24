@@ -2,7 +2,8 @@
 Comprehensive AI Service Testing Suite
 Tests all AI decision scenarios
 """
-
+import sys
+print(sys.executable)
 import requests
 import json
 from datetime import datetime
